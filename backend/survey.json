@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "title": "Customer experience",
+  "startNodeId": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "position": {
+        "x": 60,
+        "y": 180
+      },
+      "data": {
+        "label": "Welcome",
+        "content": "A little feedback goes a long way.",
+        "options": []
+      }
+    },
+    {
+      "id": "intro",
+      "type": "text",
+      "position": {
+        "x": 390,
+        "y": 180
+      },
+      "data": {
+        "label": "Before we begin",
+        "content": "We’d love to hear about your experience. This survey takes about 2 minutes.",
+        "options": []
+      }
+    },
+    {
+      "id": "question",
+      "type": "options",
+      "position": {
+        "x": 730,
+        "y": 140
+      },
+      "data": {
+        "label": "How was your experience?",
+        "content": "Choose the option that fits best.",
+        "options": [
+          {
+            "id": "great",
+            "label": "It was great"
+          },
+          {
+            "id": "okay",
+            "label": "It was okay"
+          }
+        ]
+      }
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "position": {
+        "x": 1090,
+        "y": 180
+      },
+      "data": {
+        "label": "Thank you!",
+        "content": "Your feedback helps us make things better.",
+        "options": []
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "start-intro",
+      "source": "start",
+      "target": "intro",
+      "sourceHandle": "next"
+    },
+    {
+      "id": "intro-question",
+      "source": "intro",
+      "target": "question",
+      "sourceHandle": "next"
+    },
+    {
+      "id": "question-great",
+      "source": "question",
+      "target": "end",
+      "sourceHandle": "great"
+    },
+    {
+      "id": "question-okay",
+      "source": "question",
+      "target": "end",
+      "sourceHandle": "okay"
+    }
+  ]
+}

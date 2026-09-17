@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from app.core.db import engine
 from app.core.settings import settings
 from app.models import Base
-from app.routers import auth, users
+from app.routers import auth, surveys, users
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -16,3 +16,4 @@ Base.metadata.create_all(engine)
 
 app.include_router(users.router, prefix=settings.API_V1_STR)
 app.include_router(auth.router, prefix=settings.API_V1_STR)
+app.include_router(surveys.router, prefix=settings.API_V1_STR)

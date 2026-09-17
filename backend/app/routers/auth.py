@@ -16,7 +16,6 @@ from app.core.security import (
 from app.core.settings import settings
 from app.models.password_reset_token import PasswordResetToken
 from app.models.user import User
-
 from app.schema.users import (
     CreateUserRequest,
     ForgotPasswordRequest,
