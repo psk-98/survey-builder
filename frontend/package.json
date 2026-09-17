@@ -29,6 +29,7 @@
     "@tanstack/react-start": "latest",
     "@tanstack/react-store": "latest",
     "@tanstack/store": "latest",
+    "@xyflow/react": "^12.11.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cn": "^0.3.0",
