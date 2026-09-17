@@ -13,7 +13,9 @@
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs"
   },
   "dependencies": {
     "@sentry/tanstackstart-react": "^10.67.0",

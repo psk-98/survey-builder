@@ -1,6 +1,8 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { initialNodes, initialEdges, serializeSurvey, canConnect } from '../src/components/survey/model.ts'
+import { initialNodes, initialEdges } from '../src/features/survey-builder/fixtures.ts';
+import { serializeSurvey } from '../src/features/survey-builder/helpers/serialization.ts';
+import { canConnect } from '../src/features/survey-builder/helpers/graph.ts';
 test('export preserves branch identities and positions, excluding editor internals', () => {
   const nodes = initialNodes.map(n => ({ ...n, selected: true, measured: { width: 246, height: 200 } }))
   const result = JSON.parse(JSON.stringify(serializeSurvey('Test', nodes, initialEdges)))
@@ -23,7 +25,7 @@ test('rejects cycles, self-links, links into start and links out of end', () => 
   assert.equal(canConnect('intro', 'end', 'next', initialNodes, initialEdges), true)
 })
 
-const { checkPaths } = await import('../src/components/survey/model.ts');
+const { checkPaths } = await import('../src/features/survey-builder/helpers/graph.ts');
 test('complete branching survey passes with a shared ending', () => {
   assert.deepEqual(checkPaths(initialNodes, initialEdges), { valid: true, issues: [], endCount: 1 });
 });
@@ -75,7 +77,7 @@ test('empty graph, no choices, dangling edges, invalid handles, duplicate output
   assert.equal(checkPaths([...initialNodes, { ...initialNodes[0], id: 'extra-start' }], initialEdges).valid, false);
 });
 
-const { nextOptionId } = await import('../src/components/survey/model.ts');
+const { nextOptionId } = await import('../src/features/survey-builder/helpers/options.ts');
 test('short option IDs avoid collisions after deleting a middle choice', () => {
   assert.equal(nextOptionId([]), 'option_1');
   const options = [{ id: 'option_1', label: 'Renamed' }, { id: 'option_3', label: 'Third' }];

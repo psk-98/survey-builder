@@ -1,3 +1,15 @@
+# Formlane survey builder
+
+Start with [SURVEY-BUILDER.md](./SURVEY-BUILDER.md) for setup, architecture, graph rules, and the JSON contract.
+
+- Home: `/`
+- Editor: `/survey-builder`
+- Stack: TanStack Start, React Flow, Tailwind CSS, Radix UI, TypeScript
+- Run: `npm ci` then `npm run dev`
+- Verify: `npm run typecheck`, `npm test`, and `npm run build`
+
+---
+
 Welcome to your new TanStack Start app!
 
 # Getting Started
