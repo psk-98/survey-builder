@@ -1,18 +1,18 @@
-import { Plus, Trash2, X } from "lucide-react";
-import { useId } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { BLOCKS } from "../constants";
-import type { SurveyNode } from "../types";
+import { Plus, Trash2, X } from "lucide-react"
+import { useId } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { BLOCKS } from "../constants"
+import type { SurveyNode } from "../types"
 
 interface Props {
-	node: SurveyNode;
-	onPatch: (data: Partial<SurveyNode["data"]>) => void;
-	onAddOption: () => void;
-	onRemoveOption: (id: string) => void;
-	onDelete: () => void;
-	onClose: () => void;
+	node: SurveyNode
+	onPatch: (data: Partial<SurveyNode["data"]>) => void
+	onAddOption: () => void
+	onRemoveOption: (id: string) => void
+	onDelete: () => void
+	onClose: () => void
 }
 export function NodeInspector({
 	node,
@@ -22,7 +22,7 @@ export function NodeInspector({
 	onDelete,
 	onClose,
 }: Props) {
-	const fieldId = useId();
+	const fieldId = useId()
 	return (
 		<aside
 			aria-label="Block settings"
@@ -120,5 +120,5 @@ export function NodeInspector({
 				</Button>
 			)}
 		</aside>
-	);
+	)
 }

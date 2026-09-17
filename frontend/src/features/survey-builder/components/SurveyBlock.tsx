@@ -3,26 +3,26 @@ import {
 	type NodeProps,
 	Position,
 	useUpdateNodeInternals,
-} from "@xyflow/react";
-import { memo, useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { BLOCKS } from "../constants";
-import type { SurveyNode } from "../types";
+} from "@xyflow/react"
+import { memo, useEffect } from "react"
+import { cn } from "@/lib/utils"
+import { BLOCKS } from "../constants"
+import type { SurveyNode } from "../types"
 
-const handleClass = "!size-2.5 !border-2 !border-emerald-600 !bg-white";
+const handleClass = "!size-2.5 !border-2 !border-emerald-600 !bg-white"
 export const SurveyBlock = memo(function SurveyBlock({
 	id,
 	type,
 	data,
 	selected,
 }: NodeProps<SurveyNode>) {
-	const block = BLOCKS[type];
-	const Icon = block.icon;
-	const updateNodeInternals = useUpdateNodeInternals();
+	const block = BLOCKS[type]
+	const Icon = block.icon
+	const updateNodeInternals = useUpdateNodeInternals()
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Option changes move or add handles; React Flow must remeasure them.
 	useEffect(() => {
-		updateNodeInternals(id);
-	}, [id, data.options, updateNodeInternals]);
+		updateNodeInternals(id)
+	}, [id, data.options, updateNodeInternals])
 	return (
 		<article
 			className={cn(
@@ -95,5 +95,5 @@ export const SurveyBlock = memo(function SurveyBlock({
 							: "MESSAGE"}
 			</div>
 		</article>
-	);
-});
+	)
+})

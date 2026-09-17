@@ -1,11 +1,11 @@
-import { ArrowRight, Check, Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { BLOCK_KINDS, BLOCKS } from "../constants";
-import type { AddableKind } from "../types";
+import { ArrowRight, Check, Plus } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { BLOCK_KINDS, BLOCKS } from "../constants"
+import type { AddableKind } from "../types"
 export function BlockLibrary({
 	onAdd,
 }: {
-	onAdd: (kind: AddableKind) => void;
+	onAdd: (kind: AddableKind) => void
 }) {
 	return (
 		<aside
@@ -26,8 +26,8 @@ export function BlockLibrary({
 				</p>
 			</div>
 			{BLOCK_KINDS.map((kind) => {
-				const block = BLOCKS[kind];
-				const Icon = block.icon;
+				const block = BLOCKS[kind]
+				const Icon = block.icon
 				return (
 					<button
 						type="button"
@@ -35,7 +35,7 @@ export function BlockLibrary({
 						disabled={kind === "start"}
 						aria-label={`${block.label} block${kind === "start" ? " (already on canvas)" : " — add"}`}
 						onClick={() => {
-							if (kind !== "start") onAdd(kind);
+							if (kind !== "start") onAdd(kind)
 						}}
 						className="flex items-center gap-3 rounded-lg border border-stone-200 p-2 text-left transition-colors hover:border-emerald-400 hover:bg-emerald-50/40 disabled:opacity-50 md:p-3"
 					>
@@ -59,7 +59,7 @@ export function BlockLibrary({
 							<Plus className="hidden size-3 shrink-0 md:block" />
 						)}
 					</button>
-				);
+				)
 			})}
 			<div className="mt-5 hidden rounded-xl border border-emerald-100 bg-emerald-50/50 p-4 md:block">
 				<p className="text-[9px] font-bold tracking-widest text-emerald-800">
@@ -74,5 +74,5 @@ export function BlockLibrary({
 				</p>
 			</div>
 		</aside>
-	);
+	)
 }

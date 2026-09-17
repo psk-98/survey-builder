@@ -1,5 +1,5 @@
-import type { Edge } from "@xyflow/react";
-import type { SurveyDocument, SurveyNode } from "../types";
+import type { Edge } from "@xyflow/react"
+import type { SurveyDocument, SurveyNode } from "../types"
 export function serializeSurvey(
 	title: string,
 	nodes: SurveyNode[],
@@ -21,5 +21,5 @@ export function serializeSurvey(
 			target,
 			sourceHandle: sourceHandle ?? null,
 		})),
-	};
+	}
 }

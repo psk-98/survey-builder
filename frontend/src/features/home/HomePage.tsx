@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router"
 import {
 	ArrowDown,
 	ArrowRight,
@@ -8,9 +8,9 @@ import {
 	ListChecks,
 	Plus,
 	Sparkles,
-} from "lucide-react";
-import { Brand } from "@/components/layout/Brand";
-import { Button } from "@/components/ui/button";
+} from "lucide-react"
+import { Brand } from "@/components/layout/Brand"
+import { Button } from "@/components/ui/button"
 
 const features = [
 	{
@@ -31,7 +31,7 @@ const features = [
 		description:
 			"Check that every choice leads somewhere and every journey reaches an ending.",
 	},
-];
+]
 export function HomePage() {
 	return (
 		<div className="min-h-dvh bg-[#f7f8f2] text-stone-800">
@@ -140,7 +140,7 @@ export function HomePage() {
 				<span>Make every question a conversation.</span>
 			</footer>
 		</div>
-	);
+	)
 }
 function FlowIllustration() {
 	return (
@@ -201,5 +201,5 @@ function FlowIllustration() {
 				Every path has a thoughtful ending
 			</div>
 		</div>
-	);
+	)
 }

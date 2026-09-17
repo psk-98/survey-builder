@@ -4,8 +4,8 @@ import {
 	type LucideIcon,
 	Play,
 	TextCursorInput,
-} from "lucide-react";
-import type { SurveyNodeType } from "./types";
+} from "lucide-react"
+import type { SurveyNodeType } from "./types"
 export const BLOCKS: Record<
 	SurveyNodeType,
 	{ label: string; description: string; icon: LucideIcon; color: string }
@@ -34,10 +34,5 @@ export const BLOCKS: Record<
 		icon: CircleStop,
 		color: "bg-rose-50 text-rose-700",
 	},
-};
-export const BLOCK_KINDS: SurveyNodeType[] = [
-	"start",
-	"text",
-	"options",
-	"end",
-];
+}
+export const BLOCK_KINDS: SurveyNodeType[] = ["start", "text", "options", "end"]

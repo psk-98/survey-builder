@@ -1,12 +1,12 @@
-import { ArrowRight, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import type { PathValidation } from "../types";
+import { ArrowRight, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import type { PathValidation } from "../types"
 
 interface Props {
-	validation: PathValidation;
-	onFocusNode: (id: string) => void;
-	onClose: () => void;
+	validation: PathValidation
+	onFocusNode: (id: string) => void
+	onClose: () => void
 }
 export function PathChecker({ validation, onFocusNode, onClose }: Props) {
 	return (
@@ -54,7 +54,7 @@ export function PathChecker({ validation, onFocusNode, onClose }: Props) {
 									type="button"
 									className="flex items-center gap-3 py-1 text-left hover:underline"
 									onClick={() => {
-										if (issue.nodeId) onFocusNode(issue.nodeId);
+										if (issue.nodeId) onFocusNode(issue.nodeId)
 									}}
 								>
 									{issue.message}
@@ -68,5 +68,5 @@ export function PathChecker({ validation, onFocusNode, onClose }: Props) {
 				</ul>
 			)}
 		</section>
-	);
+	)
 }

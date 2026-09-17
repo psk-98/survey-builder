@@ -6,19 +6,19 @@ import {
 	ReactFlow,
 	useNodesInitialized,
 	useReactFlow,
-} from "@xyflow/react";
-import { useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { canConnect } from "../helpers/graph";
-import type { SurveyEditor } from "../hooks/useSurveyEditor";
-import { SurveyBlock } from "./SurveyBlock";
+} from "@xyflow/react"
+import { useEffect, useRef } from "react"
+import { Button } from "@/components/ui/button"
+import { canConnect } from "../helpers/graph"
+import type { SurveyEditor } from "../hooks/useSurveyEditor"
+import { SurveyBlock } from "./SurveyBlock"
 
 const nodeTypes = {
 	start: SurveyBlock,
 	text: SurveyBlock,
 	options: SurveyBlock,
 	end: SurveyBlock,
-} satisfies NodeTypes;
+} satisfies NodeTypes
 type Props = Pick<
 	SurveyEditor,
 	| "nodes"
@@ -28,7 +28,7 @@ type Props = Pick<
 	| "onEdgesChange"
 	| "connect"
 	| "setSelectedId"
->;
+>
 export function SurveyCanvas({
 	nodes,
 	edges,
@@ -38,17 +38,17 @@ export function SurveyCanvas({
 	connect,
 	setSelectedId,
 }: Props) {
-	const initialized = useNodesInitialized();
-	const fitted = useRef(false);
-	const { fitView } = useReactFlow();
+	const initialized = useNodesInitialized()
+	const fitted = useRef(false)
+	const { fitView } = useReactFlow()
 	useEffect(() => {
-		if (!initialized || fitted.current) return;
+		if (!initialized || fitted.current) return
 		const frame = requestAnimationFrame(() => {
-			fitted.current = true;
-			void fitView({ padding: 0.18 });
-		});
-		return () => cancelAnimationFrame(frame);
-	}, [initialized, fitView]);
+			fitted.current = true
+			void fitView({ padding: 0.18 })
+		})
+		return () => cancelAnimationFrame(frame)
+	}, [initialized, fitView])
 	return (
 		<section
 			ref={canvasRef}
@@ -101,5 +101,5 @@ export function SurveyCanvas({
 				Fit all blocks
 			</Button>
 		</section>
-	);
+	)
 }

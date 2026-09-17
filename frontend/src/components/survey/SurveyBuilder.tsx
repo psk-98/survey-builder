@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react"
 import {
 	ReactFlow,
 	ReactFlowProvider,
@@ -15,7 +15,7 @@ import {
 	useUpdateNodeInternals,
 	type NodeProps,
 	type Connection,
-} from "@xyflow/react";
+} from "@xyflow/react"
 import {
 	ArrowRight,
 	Braces,
@@ -29,7 +29,7 @@ import {
 	TextCursorInput,
 	Trash2,
 	X,
-} from "lucide-react";
+} from "lucide-react"
 import {
 	initialNodes,
 	initialEdges,
@@ -39,9 +39,9 @@ import {
 	nextOptionId,
 	type Kind,
 	type SurveyNode,
-} from "./model";
-import "@xyflow/react/dist/style.css";
-import "./survey.css";
+} from "./model"
+import "@xyflow/react/dist/style.css"
+import "./survey.css"
 const info = {
 	start: {
 		label: "Start",
@@ -63,14 +63,14 @@ const info = {
 		icon: CircleStop,
 		description: "Wrap up with a final message",
 	},
-};
+}
 function SurveyBlock({ id, type, data, selected }: NodeProps<SurveyNode>) {
-	const kind = type ?? "text";
-	const Icon = info[kind].icon;
-	const update = useUpdateNodeInternals();
+	const kind = type ?? "text"
+	const Icon = info[kind].icon
+	const update = useUpdateNodeInternals()
 	useEffect(() => {
-		update(id);
-	}, [id, data.options, update]);
+		update(id)
+	}, [id, data.options, update])
 	return (
 		<div className={`survey-node ${kind} ${selected ? "active" : ""}`}>
 			{kind !== "start" && <Handle type="target" position={Position.Left} />}
@@ -107,79 +107,77 @@ function SurveyBlock({ id, type, data, selected }: NodeProps<SurveyNode>) {
 							: "MESSAGE"}
 			</div>
 		</div>
-	);
+	)
 }
 const nodeTypes = {
 	start: SurveyBlock,
 	text: SurveyBlock,
 	options: SurveyBlock,
 	end: SurveyBlock,
-};
+}
 function Editor() {
 	const [nodes, setNodes, onNodesChange] =
-		useNodesState<SurveyNode>(initialNodes);
-	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-	const [title, setTitle] = useState("Customer experience");
-	const [selectedId, setSelectedId] = useState<string | null>(null);
-	const [showJson, setShowJson] = useState(false);
-	const [showCheck, setShowCheck] = useState(false);
-	const validation = checkPaths(nodes, edges);
-	const [notice, setNotice] = useState("");
-	const { screenToFlowPosition, fitView } = useReactFlow();
-	const initialized = useNodesInitialized();
-	const fitted = useRef(false);
+		useNodesState<SurveyNode>(initialNodes)
+	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+	const [title, setTitle] = useState("Customer experience")
+	const [selectedId, setSelectedId] = useState<string | null>(null)
+	const [showJson, setShowJson] = useState(false)
+	const [showCheck, setShowCheck] = useState(false)
+	const validation = checkPaths(nodes, edges)
+	const [notice, setNotice] = useState("")
+	const { screenToFlowPosition, fitView } = useReactFlow()
+	const initialized = useNodesInitialized()
+	const fitted = useRef(false)
 	useEffect(() => {
 		if (initialized && !fitted.current) {
-			fitted.current = true;
+			fitted.current = true
 			requestAnimationFrame(() => {
-				void fitView({ padding: 0.18 });
-			});
+				void fitView({ padding: 0.18 })
+			})
 		}
-	}, [initialized, fitView]);
+	}, [initialized, fitView])
 	useEffect(() => {
-		if (!showJson) return;
-		const previous = document.activeElement as HTMLElement | null;
-		const dialog = document.querySelector<HTMLElement>(".json-modal")!;
+		if (!showJson) return
+		const previous = document.activeElement as HTMLElement | null
+		const dialog = document.querySelector<HTMLElement>(".json-modal")!
 		const controls = () =>
-			Array.from(
-				dialog.querySelectorAll<HTMLElement>('button, [tabindex="0"]'),
-			);
-		controls()[0]?.focus();
+			Array.from(dialog.querySelectorAll<HTMLElement>('button, [tabindex="0"]'))
+		controls()[0]?.focus()
 		function keydown(event: KeyboardEvent) {
-			if (event.key === "Escape") setShowJson(false);
+			if (event.key === "Escape") setShowJson(false)
 			if (event.key === "Tab") {
-				const items = controls();
+				const items = controls()
 				const first = items[0],
-					last = items[items.length - 1];
+					last = items[items.length - 1]
 				if (event.shiftKey && document.activeElement === first) {
-					event.preventDefault();
-					last?.focus();
+					event.preventDefault()
+					last?.focus()
 				} else if (!event.shiftKey && document.activeElement === last) {
-					event.preventDefault();
-					first?.focus();
+					event.preventDefault()
+					first?.focus()
 				}
 			}
 		}
-		document.addEventListener("keydown", keydown);
+		document.addEventListener("keydown", keydown)
 		return () => {
-			document.removeEventListener("keydown", keydown);
-			previous?.focus();
-		};
-	}, [showJson]);
-	const selected = nodes.find((n) => n.id === selectedId);
-	const json = JSON.stringify(serializeSurvey(title, nodes, edges), null, 2);
+			document.removeEventListener("keydown", keydown)
+			previous?.focus()
+		}
+	}, [showJson])
+	const selected = nodes.find((n) => n.id === selectedId)
+	const json = JSON.stringify(serializeSurvey(title, nodes, edges), null, 2)
 	function patch(data: Partial<SurveyNode["data"]>) {
 		setNodes((ns) =>
 			ns.map((n) =>
 				n.id === selectedId ? { ...n, data: { ...n.data, ...data } } : n,
 			),
-		);
+		)
 	}
 	function add(kind: Kind) {
-		const id = crypto.randomUUID();
+		const id = crypto.randomUUID()
 		const canvas = document
 			.querySelector(".flow-canvas")!
-			.getBoundingClientRect();
+			.getBoundingClientRect()
 		setNodes((ns) => [
 			...ns.map((n) => ({ ...n, selected: false })),
 			{
@@ -207,8 +205,8 @@ function Editor() {
 							: [],
 				},
 			},
-		]);
-		setSelectedId(id);
+		])
+		setSelectedId(id)
 	}
 	function connect(connection: Connection) {
 		if (
@@ -220,7 +218,7 @@ function Editor() {
 				edges,
 			)
 		)
-			return;
+			return
 		setEdges((es) =>
 			addEdge(
 				connection,
@@ -232,24 +230,24 @@ function Editor() {
 						),
 				),
 			),
-		);
+		)
 	}
 	function removeOption(id: string) {
-		patch({ options: selected!.data.options.filter((o) => o.id !== id) });
+		patch({ options: selected!.data.options.filter((o) => o.id !== id) })
 		setEdges((es) =>
 			es.filter((e) => !(e.source === selectedId && e.sourceHandle === id)),
-		);
+		)
 	}
 	function download() {
 		const url = URL.createObjectURL(
 			new Blob([json], { type: "application/json" }),
-		);
-		const anchor = document.createElement("a");
-		anchor.href = url;
-		anchor.download = "survey.json";
-		anchor.click();
-		URL.revokeObjectURL(url);
-		setNotice("Survey JSON exported");
+		)
+		const anchor = document.createElement("a")
+		anchor.href = url
+		anchor.download = "survey.json"
+		anchor.click()
+		URL.revokeObjectURL(url)
+		setNotice("Survey JSON exported")
 	}
 	return (
 		<div className="builder">
@@ -331,19 +329,19 @@ function Editor() {
 									{issue.nodeId ? (
 										<button
 											onClick={() => {
-												setSelectedId(issue.nodeId!);
+												setSelectedId(issue.nodeId!)
 												setNodes((ns) =>
 													ns.map((n) => ({
 														...n,
 														selected: n.id === issue.nodeId,
 													})),
-												);
+												)
 												void fitView({
 													nodes: [{ id: issue.nodeId! }],
 													padding: 0.5,
 													maxZoom: 1,
 													duration: 300,
-												});
+												})
 											}}
 										>
 											{issue.message}
@@ -371,8 +369,8 @@ function Editor() {
 						BLOCKS <span>4</span>
 					</div>
 					{(Object.keys(info) as Kind[]).map((kind) => {
-						const Icon = info[kind].icon;
-						const fixed = kind === "start";
+						const Icon = info[kind].icon
+						const fixed = kind === "start"
 						return (
 							<button
 								key={kind}
@@ -390,7 +388,7 @@ function Editor() {
 								</span>
 								{fixed ? <Check size={14} /> : <Plus size={16} />}
 							</button>
-						);
+						)
 					})}
 					<div className="tip">
 						<span>CONNECT THE DOTS</span>
@@ -546,14 +544,14 @@ function Editor() {
 							<button
 								className="button danger"
 								onClick={() => {
-									setNodes((ns) => ns.filter((n) => n.id !== selected.id));
+									setNodes((ns) => ns.filter((n) => n.id !== selected.id))
 									setEdges((es) =>
 										es.filter(
 											(e) =>
 												e.source !== selected.id && e.target !== selected.id,
 										),
-									);
-									setSelectedId(null);
+									)
+									setSelectedId(null)
 								}}
 							>
 								<Trash2 size={15} />
@@ -633,12 +631,12 @@ function Editor() {
 				</div>
 			)}
 		</div>
-	);
+	)
 }
 export default function SurveyBuilder() {
 	return (
 		<ReactFlowProvider>
 			<Editor />
 		</ReactFlowProvider>
-	);
+	)
 }

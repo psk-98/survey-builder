@@ -1,24 +1,24 @@
-import { ReactFlowProvider } from "@xyflow/react";
-import { Check, GitBranch, ListChecks, X } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { BlockLibrary } from "./components/BlockLibrary";
-import { BuilderHeader } from "./components/BuilderHeader";
-import { JsonDialog } from "./components/JsonDialog";
-import { NodeInspector } from "./components/NodeInspector";
-import { PathChecker } from "./components/PathChecker";
-import { SurveyCanvas } from "./components/SurveyCanvas";
-import { downloadJson } from "./helpers/download";
-import { useSurveyEditor } from "./hooks/useSurveyEditor";
-import "@xyflow/react/dist/style.css";
+import { ReactFlowProvider } from "@xyflow/react"
+import { Check, GitBranch, ListChecks, X } from "lucide-react"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { BlockLibrary } from "./components/BlockLibrary"
+import { BuilderHeader } from "./components/BuilderHeader"
+import { JsonDialog } from "./components/JsonDialog"
+import { NodeInspector } from "./components/NodeInspector"
+import { PathChecker } from "./components/PathChecker"
+import { SurveyCanvas } from "./components/SurveyCanvas"
+import { downloadJson } from "./helpers/download"
+import { useSurveyEditor } from "./hooks/useSurveyEditor"
+import "@xyflow/react/dist/style.css"
 function Editor() {
-	const editor = useSurveyEditor();
-	const [showCheck, setShowCheck] = useState(false);
-	const [showJson, setShowJson] = useState(false);
-	const [notice, setNotice] = useState(false);
+	const editor = useSurveyEditor()
+	const [showCheck, setShowCheck] = useState(false)
+	const [showJson, setShowJson] = useState(false)
+	const [notice, setNotice] = useState(false)
 	function download() {
-		downloadJson(editor.json);
-		setNotice(true);
+		downloadJson(editor.json)
+		setNotice(true)
 	}
 	return (
 		<div className="flex h-dvh min-h-[580px] flex-col text-sm">
@@ -114,12 +114,12 @@ function Editor() {
 				onExport={download}
 			/>
 		</div>
-	);
+	)
 }
 export function SurveyBuilder() {
 	return (
 		<ReactFlowProvider>
 			<Editor />
 		</ReactFlowProvider>
-	);
+	)
 }

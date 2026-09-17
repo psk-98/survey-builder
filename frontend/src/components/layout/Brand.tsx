@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { GitBranch } from "lucide-react";
+import { Link } from "@tanstack/react-router"
+import { GitBranch } from "lucide-react"
 export function Brand() {
 	return (
 		<Link
@@ -12,5 +12,5 @@ export function Brand() {
 			</span>
 			formlane
 		</Link>
-	);
+	)
 }

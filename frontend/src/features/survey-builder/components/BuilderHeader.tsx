@@ -1,15 +1,15 @@
-import { Braces, Download, ListChecks } from "lucide-react";
-import { Brand } from "@/components/layout/Brand";
-import { Button } from "@/components/ui/button";
+import { Braces, Download, ListChecks } from "lucide-react"
+import { Brand } from "@/components/layout/Brand"
+import { Button } from "@/components/ui/button"
 
 interface Props {
-	title: string;
-	onTitleChange: (value: string) => void;
-	issueCount: number;
-	checking: boolean;
-	onCheck: () => void;
-	onJson: () => void;
-	onExport: () => void;
+	title: string
+	onTitleChange: (value: string) => void
+	issueCount: number
+	checking: boolean
+	onCheck: () => void
+	onJson: () => void
+	onExport: () => void
 }
 export function BuilderHeader({
 	title,
@@ -54,5 +54,5 @@ export function BuilderHeader({
 				</Button>
 			</div>
 		</header>
-	);
+	)
 }

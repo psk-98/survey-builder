@@ -1,5 +1,5 @@
-import type { XYPosition } from "@xyflow/react";
-import type { AddableKind, SurveyNode } from "../types";
+import type { XYPosition } from "@xyflow/react"
+import type { AddableKind, SurveyNode } from "../types"
 export function createSurveyNode(
 	kind: AddableKind,
 	id: string,
@@ -26,5 +26,5 @@ export function createSurveyNode(
 						]
 					: [],
 		},
-	};
+	}
 }

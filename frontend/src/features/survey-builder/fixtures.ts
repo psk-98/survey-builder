@@ -1,5 +1,5 @@
-import type { Edge } from "@xyflow/react";
-import type { SurveyNode } from "./types";
+import type { Edge } from "@xyflow/react"
+import type { SurveyNode } from "./types"
 export const initialNodes: SurveyNode[] = [
 	{
 		id: "start",
@@ -47,7 +47,7 @@ export const initialNodes: SurveyNode[] = [
 			options: [],
 		},
 	},
-];
+]
 export const initialEdges: Edge[] = [
 	{ id: "start-intro", source: "start", target: "intro", sourceHandle: "next" },
 	{
@@ -62,4 +62,4 @@ export const initialEdges: Edge[] = [
 		target: "end",
 		sourceHandle: id,
 	})),
-];
+]

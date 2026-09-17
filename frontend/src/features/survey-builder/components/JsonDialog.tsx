@@ -1,14 +1,14 @@
-import { Download, X } from "lucide-react";
-import { Dialog } from "radix-ui";
-import { Button } from "@/components/ui/button";
-import type { PathValidation } from "../types";
+import { Download, X } from "lucide-react"
+import { Dialog } from "radix-ui"
+import { Button } from "@/components/ui/button"
+import type { PathValidation } from "../types"
 
 interface Props {
-	open: boolean;
-	onOpenChange: (open: boolean) => void;
-	json: string;
-	validation: PathValidation;
-	onExport: () => void;
+	open: boolean
+	onOpenChange: (open: boolean) => void
+	json: string
+	validation: PathValidation
+	onExport: () => void
 }
 export function JsonDialog({
 	open,
@@ -60,5 +60,5 @@ export function JsonDialog({
 				</Dialog.Content>
 			</Dialog.Portal>
 		</Dialog.Root>
-	);
+	)
 }
