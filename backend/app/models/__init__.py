@@ -4,4 +4,4 @@ from app.models.survey import Survey
 from app.models.survey_interaction import SurveyInteraction
 from app.models.user import User
 
-__all__ = ["Base", "User", "PasswordResetToken", "Survey", "SurveyInteraction"]
+__all__ = ["Base", "PasswordResetToken", "Survey", "SurveyInteraction", "User"]

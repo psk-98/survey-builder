@@ -59,10 +59,10 @@ class SurveyDefinition(BaseModel):
 
 
 class CreateSurveyRequest(BaseModel):
-    survey_steps: SurveyDefinition
+    survey_defintion: SurveyDefinition
 
 
 class SurveyResponse(BaseModel):
     id: int
     name: str
-    survey_steps: SurveyDefinition
+    survey_defintion: SurveyDefinition

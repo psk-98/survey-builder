@@ -1,6 +1,6 @@
 import hashlib
 import secrets
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from jose import jwt
 from passlib.context import CryptContext
@@ -13,7 +13,7 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def create_access_token(
     username: str, user_id: int, role: str, expires_delta: timedelta
 ) -> str:
-    expires = datetime.now(timezone.utc) + expires_delta
+    expires = datetime.now(UTC) + expires_delta
     to_encode = {"sub": username, "id": user_id, "role": role, "exp": expires}
 
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)

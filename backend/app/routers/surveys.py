@@ -13,9 +13,9 @@ def create_survey(
 ):
     print(auth_user)
     survey = Survey(
-        name=request.survey_steps.title,
+        name=request.survey_defintion.title,
         user_id=auth_user["user_id"],
-        survey_definition=request.survey_steps.model_dump(),
+        survey_definition=request.survey_defintion.model_dump(),
     )
     print(survey)
     db.add(survey)
@@ -47,5 +47,58 @@ def get_survey(auth_user: user_dependency, db: db_dependency, survey_id: str):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized"
         )
+
+    return survey
+
+
+@router.put(
+    "/{survey_id}", response_model=SurveyResponse, status_code=status.HTTP_202_ACCEPTED
+)
+def update_survey(
+    request: CreateSurveyRequest,
+    auth_user: user_dependency,
+    db: db_dependency,
+    survey_id: str,
+):
+    survey = db.query(Survey).filter(Survey.id == survey_id).first()
+
+    if survey is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Survey not found"
+        )
+
+    if survey.user_id != auth_user["user_id"]:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized"
+        )
+
+    survey.name = request.survey_defintion.title
+    survey.survey_definition = request.survey_defintion.model_dump()
+
+    db.commit()
+    db.refresh(survey)
+
+    return survey
+
+
+@router.delete("/{survey_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_survey(
+    auth_user: user_dependency,
+    db: db_dependency,
+    survey_id: str,
+):
+    survey = db.query(Survey).filter(Survey.id == survey_id).first()
+
+    if survey is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Survey not found"
+        )
+
+    if survey.user_id != auth_user["user_id"]:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized"
+        )
+
+    db.delete(survey)
 
     return survey
