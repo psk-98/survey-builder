@@ -1,4 +1,5 @@
-import { Braces, Download, ListChecks } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import { Braces, Download, ListChecks, Save } from "lucide-react"
 import { Brand } from "@/components/layout/Brand"
 import { Button } from "@/components/ui/button"
 
@@ -10,6 +11,9 @@ interface Props {
 	onCheck: () => void
 	onJson: () => void
 	onExport: () => void
+	onSave: () => void
+	saving: boolean
+	saved: boolean
 }
 export function BuilderHeader({
 	title,
@@ -19,6 +23,9 @@ export function BuilderHeader({
 	onCheck,
 	onJson,
 	onExport,
+	onSave,
+	saving,
+	saved,
 }: Props) {
 	return (
 		<header className="flex shrink-0 flex-wrap items-center gap-4 border-b border-stone-200 bg-white px-4 py-4 lg:px-7">
@@ -31,10 +38,13 @@ export function BuilderHeader({
 					onChange={(e) => onTitleChange(e.target.value)}
 				/>
 				<span className="rounded-md bg-stone-100 px-2 py-1 text-[10px] text-stone-500">
-					Draft
+					{saved ? "Saved" : "Unsaved"}
 				</span>
 			</div>
 			<div className="flex w-full flex-wrap gap-2 lg:ml-auto lg:w-auto">
+				<Button variant="ghost" asChild>
+					<Link to="/surveys">Surveys</Link>
+				</Button>
 				<Button variant="outline" aria-expanded={checking} onClick={onCheck}>
 					<ListChecks />
 					Check paths
@@ -48,9 +58,13 @@ export function BuilderHeader({
 					<Braces />
 					View JSON
 				</Button>
-				<Button onClick={onExport}>
+				<Button variant="outline" onClick={onExport}>
 					<Download />
 					Export JSON
+				</Button>
+				<Button onClick={onSave} disabled={saving || saved}>
+					<Save />
+					{saving ? "Saving…" : "Save survey"}
 				</Button>
 			</div>
 		</header>

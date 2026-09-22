@@ -10,11 +10,45 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SurveyBuilderRouteImport } from './routes/survey-builder'
+import { Route as SurveysRouteImport } from './routes/surveys'
+import { Route as SurveysSurveyIdRouteImport } from './routes/surveys_.$surveyId'
+import { Route as ApiBackendSplatRouteImport } from './routes/api.backend.$'
+import { Route as SurveysSurveyIdInteractionsInteractionIdRouteImport } from './routes/surveys_.$surveyId_.interactions.$interactionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SurveyBuilderRoute = SurveyBuilderRouteImport.update({
@@ -22,31 +56,122 @@ const SurveyBuilderRoute = SurveyBuilderRouteImport.update({
   path: '/survey-builder',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SurveysRoute = SurveysRouteImport.update({
+  id: '/surveys',
+  path: '/surveys',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurveysSurveyIdRoute = SurveysSurveyIdRouteImport.update({
+  id: '/surveys_/$surveyId',
+  path: '/surveys/$surveyId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiBackendSplatRoute = ApiBackendSplatRouteImport.update({
+  id: '/api/backend/$',
+  path: '/api/backend/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurveysSurveyIdInteractionsInteractionIdRoute =
+  SurveysSurveyIdInteractionsInteractionIdRouteImport.update({
+    id: '/surveys_/$surveyId_/interactions/$interactionId',
+    path: '/surveys/$surveyId/interactions/$interactionId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/survey-builder': typeof SurveyBuilderRoute
+  '/surveys': typeof SurveysRoute
+  '/surveys/$surveyId': typeof SurveysSurveyIdRoute
+  '/api/backend/$': typeof ApiBackendSplatRoute
+  '/surveys/$surveyId/interactions/$interactionId': typeof SurveysSurveyIdInteractionsInteractionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/survey-builder': typeof SurveyBuilderRoute
+  '/surveys': typeof SurveysRoute
+  '/surveys/$surveyId': typeof SurveysSurveyIdRoute
+  '/api/backend/$': typeof ApiBackendSplatRoute
+  '/surveys/$surveyId/interactions/$interactionId': typeof SurveysSurveyIdInteractionsInteractionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/survey-builder': typeof SurveyBuilderRoute
+  '/surveys': typeof SurveysRoute
+  '/surveys_/$surveyId': typeof SurveysSurveyIdRoute
+  '/api/backend/$': typeof ApiBackendSplatRoute
+  '/surveys_/$surveyId_/interactions/$interactionId': typeof SurveysSurveyIdInteractionsInteractionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/survey-builder'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/profile'
+    | '/register'
+    | '/reset-password'
+    | '/survey-builder'
+    | '/surveys'
+    | '/surveys/$surveyId'
+    | '/api/backend/$'
+    | '/surveys/$surveyId/interactions/$interactionId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/survey-builder'
-  id: '__root__' | '/' | '/survey-builder'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/profile'
+    | '/register'
+    | '/reset-password'
+    | '/survey-builder'
+    | '/surveys'
+    | '/surveys/$surveyId'
+    | '/api/backend/$'
+    | '/surveys/$surveyId/interactions/$interactionId'
+  id:
+    | '__root__'
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/profile'
+    | '/register'
+    | '/reset-password'
+    | '/survey-builder'
+    | '/surveys'
+    | '/surveys_/$surveyId'
+    | '/api/backend/$'
+    | '/surveys_/$surveyId_/interactions/$interactionId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  LoginRoute: typeof LoginRoute
+  ProfileRoute: typeof ProfileRoute
+  RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SurveyBuilderRoute: typeof SurveyBuilderRoute
+  SurveysRoute: typeof SurveysRoute
+  SurveysSurveyIdRoute: typeof SurveysSurveyIdRoute
+  ApiBackendSplatRoute: typeof ApiBackendSplatRoute
+  SurveysSurveyIdInteractionsInteractionIdRoute: typeof SurveysSurveyIdInteractionsInteractionIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +183,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/survey-builder': {
       id: '/survey-builder'
       path: '/survey-builder'
@@ -65,12 +225,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurveyBuilderRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/surveys': {
+      id: '/surveys'
+      path: '/surveys'
+      fullPath: '/surveys'
+      preLoaderRoute: typeof SurveysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/surveys_/$surveyId': {
+      id: '/surveys_/$surveyId'
+      path: '/surveys/$surveyId'
+      fullPath: '/surveys/$surveyId'
+      preLoaderRoute: typeof SurveysSurveyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/backend/$': {
+      id: '/api/backend/$'
+      path: '/api/backend/$'
+      fullPath: '/api/backend/$'
+      preLoaderRoute: typeof ApiBackendSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/surveys_/$surveyId_/interactions/$interactionId': {
+      id: '/surveys_/$surveyId_/interactions/$interactionId'
+      path: '/surveys/$surveyId/interactions/$interactionId'
+      fullPath: '/surveys/$surveyId/interactions/$interactionId'
+      preLoaderRoute: typeof SurveysSurveyIdInteractionsInteractionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  LoginRoute: LoginRoute,
+  ProfileRoute: ProfileRoute,
+  RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SurveyBuilderRoute: SurveyBuilderRoute,
+  SurveysRoute: SurveysRoute,
+  SurveysSurveyIdRoute: SurveysSurveyIdRoute,
+  ApiBackendSplatRoute: ApiBackendSplatRoute,
+  SurveysSurveyIdInteractionsInteractionIdRoute:
+    SurveysSurveyIdInteractionsInteractionIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

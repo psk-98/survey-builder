@@ -37,8 +37,11 @@ export function HomePage() {
 		<div className="min-h-dvh bg-[#f7f8f2] text-stone-800">
 			<header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-6 lg:px-12">
 				<Brand />
+				<Button variant="ghost" className="ml-auto" asChild>
+					<Link to="/login">Sign in</Link>
+				</Button>
 				<Button variant="outline" asChild>
-					<Link to="/survey-builder">
+					<Link to="/surveys">
 						Open builder
 						<ArrowRight />
 					</Link>
@@ -61,7 +64,7 @@ export function HomePage() {
 						</p>
 						<div className="mt-8 flex flex-wrap items-center gap-4">
 							<Button size="lg" className="h-12 rounded-lg px-6" asChild>
-								<Link to="/survey-builder">
+								<Link to="/surveys">
 									Build your survey
 									<ArrowRight />
 								</Link>
@@ -128,7 +131,7 @@ export function HomePage() {
 						</div>
 					</div>
 					<Button variant="outline" asChild>
-						<Link to="/survey-builder">
+						<Link to="/surveys">
 							Explore the builder
 							<ArrowRight />
 						</Link>

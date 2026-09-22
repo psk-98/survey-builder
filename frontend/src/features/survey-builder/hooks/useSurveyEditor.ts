@@ -1,6 +1,7 @@
 import {
 	addEdge,
 	type Connection,
+	type Edge,
 	useEdgesState,
 	useNodesState,
 	useReactFlow,
@@ -11,13 +12,18 @@ import { canConnect, checkPaths } from "../helpers/graph"
 import { createSurveyNode } from "../helpers/nodes"
 import { nextOptionId } from "../helpers/options"
 import { serializeSurvey } from "../helpers/serialization"
-import type { AddableKind, SurveyNode } from "../types"
+import type { AddableKind, SurveyDocument, SurveyNode } from "../types"
 
-export function useSurveyEditor() {
-	const [nodes, setNodes, onNodesChange] =
-		useNodesState<SurveyNode>(initialNodes)
-	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-	const [title, setTitle] = useState("Customer experience")
+export function useSurveyEditor(initial?: SurveyDocument) {
+	const [nodes, setNodes, onNodesChange] = useNodesState<SurveyNode>(
+		initial
+			? initial.nodes.map((n) => ({ ...n, deletable: n.type !== "start" }))
+			: initialNodes,
+	)
+	const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(
+		initial?.edges ?? initialEdges,
+	)
+	const [title, setTitle] = useState(initial?.title ?? "Untitled survey")
 	const [selectedId, setSelectedId] = useState<string | null>(null)
 	const canvasRef = useRef<HTMLElement>(null)
 	const { screenToFlowPosition, fitView } = useReactFlow<SurveyNode>()
