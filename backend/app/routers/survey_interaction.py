@@ -120,7 +120,7 @@ def handle_survey_interactions(request: SurveyInteractionRequest, db: db_depende
     response_model=SurveyInteractionRes,
     status_code=status.HTTP_200_OK,
 )
-def get_surveys_interactions(
+def get_survey_interactions(
     survey_interaction_id: str, auth_user: user_dependency, db: db_dependency
 ):
     survey_interaction = (

@@ -45,10 +45,10 @@ class SurveyInteractionAnswer(BaseModel):
 
 
 class SurveyInteractionRes(BaseModel):
-    id: str
-    survey_id: str
-    answers: list[SurveyInteractionAnswer]
-    current_step: str
+    id: int
+    survey_id: int
+    answers: list[SurveyInteractionAnswer] | None = None
+    current_step: str | None = None
     completed: bool
     created_at: datetime
     updated_at: datetime
