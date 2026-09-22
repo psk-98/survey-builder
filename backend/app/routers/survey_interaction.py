@@ -17,8 +17,17 @@ def find_node(definition: SurveyDefinition, node_id: str) -> Node | None:
     return next((node for node in definition.nodes if node.id == node_id), None)
 
 
-def find_next_node(definition: SurveyDefinition, node_id: str) -> Edge | None:
-    return next((node for node in definition.edges if node.source == node_id), None)
+def find_next_node(
+    definition: SurveyDefinition, node_id: str, answer: str = "next"
+) -> Edge | None:
+    return next(
+        (
+            node
+            for node in definition.edges
+            if node.source == node_id and node.sourceHandle == answer
+        ),
+        None,
+    )
 
 
 @router.post("/", status_code=status.HTTP_200_OK)
@@ -27,7 +36,7 @@ def handle_survey_interactions(request: SurveyInteractionRequest, db: db_depende
 
     # print(survey.id)
     sd = SurveyDefinition.model_validate(survey.survey_definition)
-    print(request)
+    # print(request)
     if request.survey_interaction_id is None:
         si = SurveyInteraction(
             survey_id=request.survey_id,
@@ -76,15 +85,26 @@ def handle_survey_interactions(request: SurveyInteractionRequest, db: db_depende
             else request.answer,
         }
         si.answers = [*(si.answers or []), new_answer]
+        # print(
+        #     new_answer["answer"]["id"]
+        #     if node.type == "options"
+        #     else new_answer["answer"]
+        # )
 
-        si.current_step = find_next_node(sd, si.current_step).target
+        si.current_step = (
+            find_next_node(sd, si.current_step, new_answer["answer"]["id"]).target
+            if node.type == "options"
+            else find_next_node(sd, si.current_step).target
+        )
+
+        # print(si.current_step)
 
         # db.add(si)
         db.commit()
         db.refresh(si)
-        print(si.current_step)
+        # print(si.current_step)
 
-        # if(find_next_node(sd, si.current_step).target is None):
+        # # if(find_next_node(sd, si.current_step).target is None):
 
         return {
             "survey_interaction_id": si.id,
