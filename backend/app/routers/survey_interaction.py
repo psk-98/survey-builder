@@ -1,6 +1,7 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, HTTPException, status
+from sqlalchemy.orm import selectinload
 
-from app.core.deps import db_dependency
+from app.core.deps import db_dependency, user_dependency
 from app.models.survey import Survey, SurveyTypes
 from app.models.survey_interaction import SurveyInteraction
 from app.models.survey_session import SurveySessions
@@ -8,6 +9,7 @@ from app.schema.survey import Edge, Node, SurveyDefinition
 from app.schema.survey_interaction import (
     SurveyInteractionAnswer,
     SurveyInteractionRequest,
+    SurveyInteractionRes,
 )
 
 router = APIRouter(prefix="/survey-interactions", tags=["survey-interactions"])
@@ -111,3 +113,50 @@ def handle_survey_interactions(request: SurveyInteractionRequest, db: db_depende
             "survey_id": request.survey_id,
             "node": find_node(sd, si.current_step),
         }
+
+
+@router.get(
+    "/{survey_id}/{survey_interaction_id}",
+    response_model=SurveyInteractionRes,
+    status_code=status.HTTP_200_OK,
+)
+def get_surveys_interactions(
+    survey_interaction_id: str, auth_user: user_dependency, db: db_dependency
+):
+    survey_interaction = (
+        db.query(SurveyInteraction)
+        .filter(SurveyInteraction.id == survey_interaction_id)
+        .first()
+    )
+
+    # a guard be returning must
+
+    return survey_interaction
+
+
+@router.get(
+    "/{survey_id}",
+    response_model=list[SurveyInteractionRes],
+    status_code=status.HTTP_200_OK,
+)
+def get_surveys_interactions(
+    survey_id: str, auth_user: user_dependency, db: db_dependency
+):
+    survey = (
+        db.query(Survey)
+        .options(selectinload(Survey.interactions))
+        .filter(Survey.id == survey_id)
+        .first()
+    )
+
+    if survey is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Survey not found"
+        )
+
+    if survey.user_id != auth_user["user_id"]:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized"
+        )
+
+    return survey.interactions

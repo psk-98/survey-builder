@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -40,3 +42,13 @@ class SurveyInteractionAnswer(BaseModel):
     question: str
     type: str
     answer: str | Option
+
+
+class SurveyInteractionRes(BaseModel):
+    id: str
+    survey_id: str
+    answers: list[SurveyInteractionAnswer]
+    current_step: str
+    completed: bool
+    created_at: datetime
+    updated_at: datetime
